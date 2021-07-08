@@ -12,12 +12,30 @@ public class Main implements ActionListener
     JFrame window;
 
     JMenuBar sortAlgorithmTypesBar;
+    JButton bitonicSortButton;
+    JButton bogoSortButton;
+    JButton brickSortButton;
     JButton bubbleSortButton;
+    JButton cocktailSortButton;
+    JButton combSortButton;
+    JButton countingSortButton;
+    JButton cycleSortButton;
+    JButton gnomeSortButton;
+    JButton heapSortButton;
+    JButton insertionSortButton;
+    JButton mergeSortButton;
+    JButton pancakeSortButton;
+    JButton pigeonholeSortButton;
+    JButton quickSortButton;
+    JButton radixSortButton;
     JButton selectionSortButton;
+    JButton shellSortButton;
+    JButton stoogeSortButton;
+    JButton timSortButton;
+
     JButton sortButton;
 
     ArrayManager arrayManager;
-
     SortAlgorithm algorithm;
 
     public Main()
@@ -36,7 +54,7 @@ public class Main implements ActionListener
         window.setVisible(true);
 
         //new SelectionSort().runSort(arrayManager);
-        new BubbleSort().runSort(arrayManager);
+        //new BubbleSort().runSort(arrayManager);
         //new InsertionSort().runSort(arrayManager);
         //new MergeSort().runSort(arrayManager);
         //new HeapSort().runSort(arrayManager);
@@ -50,12 +68,12 @@ public class Main implements ActionListener
         //new CycleSort().runSort(arrayManager);
         //new TimSort().runSort(arrayManager);
         //new CocktailSort().runSort(arrayManager);
-        //new StrandSort().runSort(arrayManager);
+        //TODO: MAY NOT DO: new StrandSort().runSort(arrayManager);
         //new BitonicSort().runSort(arrayManager);
         //new PancakeSort().runSort(arrayManager);
         //new BogoSort().runSort(arrayManager);
         //new GnomeSort().runSort(arrayManager);
-        //new SleepSort().runSort(arrayManager);
+        //TODO: MAY NOT DO: new SleepSort().runSort(arrayManager);
         //TODO: MAY NOT DO: new StructureSort().runSort(arrayManager);
         //new StoogeSort().runSort(arrayManager);
         //TODO: MAY NOT DO: new TagSort().runSort(arrayManager);
@@ -76,11 +94,87 @@ public class Main implements ActionListener
         sortAlgorithmTypesBar = new JMenuBar();
         window.add(sortAlgorithmTypesBar, BorderLayout.SOUTH);
 
-        bubbleSortButton = new JButton("Bubble Sort");
+        bubbleSortButton = new JButton("Bubble");
         bubbleSortButton.addActionListener(this);
         sortAlgorithmTypesBar.add(bubbleSortButton);
 
-        selectionSortButton = new JButton("Selection Sort");
+        selectionSortButton = new JButton("Selection");
+        selectionSortButton.addActionListener(this);
+        sortAlgorithmTypesBar.add(selectionSortButton);
+
+        selectionSortButton = new JButton("Insertion");
+        selectionSortButton.addActionListener(this);
+        sortAlgorithmTypesBar.add(selectionSortButton);
+
+        selectionSortButton = new JButton("Merge");
+        selectionSortButton.addActionListener(this);
+        sortAlgorithmTypesBar.add(selectionSortButton);
+
+        selectionSortButton = new JButton("Heap");
+        selectionSortButton.addActionListener(this);
+        sortAlgorithmTypesBar.add(selectionSortButton);
+
+        selectionSortButton = new JButton("Quick");
+        selectionSortButton.addActionListener(this);
+        sortAlgorithmTypesBar.add(selectionSortButton);
+
+        selectionSortButton = new JButton("Radix");
+        selectionSortButton.addActionListener(this);
+        sortAlgorithmTypesBar.add(selectionSortButton);
+
+        selectionSortButton = new JButton("Counting");
+        selectionSortButton.addActionListener(this);
+        sortAlgorithmTypesBar.add(selectionSortButton);
+
+        selectionSortButton = new JButton("Bucket");
+        selectionSortButton.addActionListener(this);
+        sortAlgorithmTypesBar.add(selectionSortButton);
+
+        selectionSortButton = new JButton("Shell");
+        selectionSortButton.addActionListener(this);
+        sortAlgorithmTypesBar.add(selectionSortButton);
+
+        selectionSortButton = new JButton("Comb");
+        selectionSortButton.addActionListener(this);
+        sortAlgorithmTypesBar.add(selectionSortButton);
+
+        selectionSortButton = new JButton("Pigeonhole");
+        selectionSortButton.addActionListener(this);
+        sortAlgorithmTypesBar.add(selectionSortButton);
+
+        selectionSortButton = new JButton("Cycle");
+        selectionSortButton.addActionListener(this);
+        sortAlgorithmTypesBar.add(selectionSortButton);
+
+        selectionSortButton = new JButton("Tim");
+        selectionSortButton.addActionListener(this);
+        sortAlgorithmTypesBar.add(selectionSortButton);
+
+        selectionSortButton = new JButton("Cocktail");
+        selectionSortButton.addActionListener(this);
+        sortAlgorithmTypesBar.add(selectionSortButton);
+
+        selectionSortButton = new JButton("Bitonic");
+        selectionSortButton.addActionListener(this);
+        sortAlgorithmTypesBar.add(selectionSortButton);
+
+        selectionSortButton = new JButton("Pancake");
+        selectionSortButton.addActionListener(this);
+        sortAlgorithmTypesBar.add(selectionSortButton);
+
+        selectionSortButton = new JButton("Bogo");
+        selectionSortButton.addActionListener(this);
+        sortAlgorithmTypesBar.add(selectionSortButton);
+
+        selectionSortButton = new JButton("Gnome");
+        selectionSortButton.addActionListener(this);
+        sortAlgorithmTypesBar.add(selectionSortButton);
+
+        selectionSortButton = new JButton("Stooge");
+        selectionSortButton.addActionListener(this);
+        sortAlgorithmTypesBar.add(selectionSortButton);
+
+        selectionSortButton = new JButton("Brick");
         selectionSortButton.addActionListener(this);
         sortAlgorithmTypesBar.add(selectionSortButton);
 

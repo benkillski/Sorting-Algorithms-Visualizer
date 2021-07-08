@@ -7,8 +7,8 @@ import java.awt.*;
 import java.util.Random;
 
 public class ArrayManager extends JPanel {
-    public static final int WINDOW_WIDTH = 1280;
-    public static final int WINDOW_HEIGHT = 720;
+    public static final int WINDOW_WIDTH = 1525;
+    public static final int WINDOW_HEIGHT = 700;
     private static final int COLUMN_WIDTH = 10;
 
     private static final long milliSecDelay = 20;
@@ -69,7 +69,6 @@ public class ArrayManager extends JPanel {
         }
         while(timeElapsed < nanoSeconds);
     }
-
 
     @Override
     protected void paintComponent(Graphics g)
