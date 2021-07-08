@@ -50,7 +50,9 @@ public class Main implements ActionListener
         //new PigeonholeSort().runSort(arrayManager);
         //new CycleSort().runSort(arrayManager);
         //new TimSort().runSort(arrayManager);
-        new CocktailSort().runSort(arrayManager);
+        //new CocktailSort().runSort(arrayManager);
+        //new StrandSort().runSort(arrayManager);
+        new BitonicSort().runSort(arrayManager);
 
     }
 
