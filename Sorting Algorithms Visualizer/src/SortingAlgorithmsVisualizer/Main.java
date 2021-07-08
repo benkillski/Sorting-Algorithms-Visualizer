@@ -55,9 +55,9 @@ public class Main implements ActionListener
         //new PancakeSort().runSort(arrayManager);
         //new BogoSort().runSort(arrayManager);
         //new GnomeSort().runSort(arrayManager);
-        new SleepSort().runSort(arrayManager);
-        //new StructureSort().runSort(arrayManager);
-        //new StoogeSort().runSort(arrayManager);
+        //new SleepSort().runSort(arrayManager);
+        //TODO: MAY NOT DO: new StructureSort().runSort(arrayManager);
+        new StoogeSort().runSort(arrayManager);
         //new TagSort().runSort(arrayManager);
         //new TreeSort().runSort(arrayManager);
         //new CartesianTreeSort().runSort(arrayManager);
