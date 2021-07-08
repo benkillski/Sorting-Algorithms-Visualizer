@@ -41,7 +41,8 @@ public class Main
         //new BubbleSort().runSort(arrayManager);
         //new InsertionSort().runSort(arrayManager);
         //new MergeSort().runSort(arrayManager);
-        new HeapSort().runSort(arrayManager);
+        //new HeapSort().runSort(arrayManager);
+        new QuickSort().runSort(arrayManager);
 
     }
 
