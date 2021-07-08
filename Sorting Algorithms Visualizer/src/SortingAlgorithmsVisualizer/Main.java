@@ -36,9 +36,9 @@ public class Main implements ActionListener
         window.setVisible(true);
 
         //new SelectionSort().runSort(arrayManager);
-        //new BubbleSort().runSort(arrayManager);
+        new BubbleSort().runSort(arrayManager);
         //new InsertionSort().runSort(arrayManager);
-        new MergeSort().runSort(arrayManager);
+        //new MergeSort().runSort(arrayManager);
         //new HeapSort().runSort(arrayManager);
         //new QuickSort().runSort(arrayManager);
         //new RadixSort().runSort(arrayManager);
@@ -59,8 +59,8 @@ public class Main implements ActionListener
         //TODO: MAY NOT DO: new StructureSort().runSort(arrayManager);
         //new StoogeSort().runSort(arrayManager);
         //TODO: MAY NOT DO: new TagSort().runSort(arrayManager);
-        //new TreeSort().runSort(arrayManager);
-        //new CartesianTreeSort().runSort(arrayManager);
+        //TODO: MAY NOT DO: new TreeSort().runSort(arrayManager);
+        //TODO: MAY NOT DO: new CartesianTreeSort().runSort(arrayManager);
         //new BrickSort().runSort(arrayManager);
 
         System.out.print(arrayManager.sortSuccess());
