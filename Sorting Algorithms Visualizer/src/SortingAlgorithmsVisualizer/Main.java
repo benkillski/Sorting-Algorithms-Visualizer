@@ -1,9 +1,6 @@
 package SortingAlgorithmsVisualizer;
 
-import SortingAlgorithmsVisualizer.Algorithms.BubbleSort;
-import SortingAlgorithmsVisualizer.Algorithms.InsertionSort;
-import SortingAlgorithmsVisualizer.Algorithms.SelectionSort;
-import SortingAlgorithmsVisualizer.Algorithms.SortAlgorithm;
+import SortingAlgorithmsVisualizer.Algorithms.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -42,7 +39,9 @@ public class Main
 
         //new SelectionSort().runSort(arrayManager);
         //new BubbleSort().runSort(arrayManager);
-        new InsertionSort().runSort(arrayManager);
+        //new InsertionSort().runSort(arrayManager);
+        //new MergeSort().runSort(arrayManager);
+        new HeapSort().runSort(arrayManager);
 
     }
 
