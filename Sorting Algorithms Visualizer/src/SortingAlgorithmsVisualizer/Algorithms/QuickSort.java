@@ -38,4 +38,10 @@ public class QuickSort implements SortAlgorithm
         array.swap(i + 1, end);
         return (i + 1);
     }
+
+    @Override
+    public String algorithmName()
+    {
+        return "Quick";
+    }
 }

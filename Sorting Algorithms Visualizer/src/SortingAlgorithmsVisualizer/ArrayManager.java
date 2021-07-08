@@ -97,6 +97,11 @@ public class ArrayManager extends JPanel
         array[index] = newValue;
         columnColors[index] = 100;
         repaint();
-        sleepForNanoSecs(2 * 1000000);
+        sleepForNanoSecs(milliSecDelay * 1000000);
+    }
+
+    public int[] getArray()
+    {
+        return array;
     }
 }

@@ -53,4 +53,10 @@ public class RadixSort implements SortAlgorithm
         }
         return max;
     }
+
+    @Override
+    public String algorithmName()
+    {
+        return "Radix";
+    }
 }

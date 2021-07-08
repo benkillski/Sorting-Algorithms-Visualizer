@@ -19,4 +19,10 @@ public class SelectionSort implements SortAlgorithm {
             array.swap(minIndex, i);
         }
     }
+
+    @Override
+    public String algorithmName()
+    {
+        return "Selection";
+    }
 }

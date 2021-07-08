@@ -24,4 +24,10 @@ public class InsertionSort implements SortAlgorithm
             array.setArrayValue(j + 1, key);
         }
     }
+
+    @Override
+    public String algorithmName()
+    {
+        return "Insertion";
+    }
 }

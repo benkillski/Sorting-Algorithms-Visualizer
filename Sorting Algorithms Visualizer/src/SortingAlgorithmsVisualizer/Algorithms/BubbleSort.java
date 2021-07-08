@@ -19,4 +19,10 @@ public class BubbleSort implements SortAlgorithm
             }
         }
     }
+
+    @Override
+    public String algorithmName()
+    {
+        return "Bubble";
+    }
 }

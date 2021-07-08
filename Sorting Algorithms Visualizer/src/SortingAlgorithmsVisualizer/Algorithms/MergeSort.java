@@ -60,4 +60,10 @@ public class MergeSort implements SortAlgorithm
         for(i = left; i <= right; i++)
             array.setArrayValue(i, temp[i - left]);
     }
+
+    @Override
+    public String algorithmName()
+    {
+        return "Merge";
+    }
 }
