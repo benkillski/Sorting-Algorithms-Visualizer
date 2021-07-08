@@ -6,8 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
 
-public class ArrayManager extends JPanel
-{
+public class ArrayManager extends JPanel {
     public static final int WINDOW_WIDTH = 1280;
     public static final int WINDOW_HEIGHT = 720;
     private static final int COLUMN_WIDTH = 10;
@@ -17,8 +16,7 @@ public class ArrayManager extends JPanel
     private final int[] array;
     private final int[] columnColors;
 
-    public ArrayManager()
-    {
+    public ArrayManager() {
         setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
 
         array = new int[WINDOW_WIDTH / COLUMN_WIDTH];
@@ -28,13 +26,23 @@ public class ArrayManager extends JPanel
         setBackground(Color.BLACK);
     }
 
-    void randomizeArray()
-    {
+    void randomizeArray() {
         Random rand = new Random();
-        for(int i = 0; i < array.length - 1; i++)
-        {
+        for (int i = 0; i < array.length - 1; i++) {
             array[i] = rand.nextInt(WINDOW_HEIGHT - 1);
         }
+    }
+
+    boolean sortSuccess()
+    {
+        for(int i = 0; i < array.length - 1; i++)
+        {
+            if(array[i] > array[i + 1])
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     public void swap(int index1, int index2)
