@@ -10,9 +10,9 @@ public class ArrayManager extends JPanel
 {
     public static final int WINDOW_WIDTH = 1280;
     public static final int WINDOW_HEIGHT = 720;
-    private static final int COLUMN_WIDTH = 4;
+    private static final int COLUMN_WIDTH = 10;
 
-    private static final long milliSecDelay = 2;
+    private static final long milliSecDelay = 20;
 
     private final int[] array;
     private final int[] columnColors;
@@ -25,7 +25,7 @@ public class ArrayManager extends JPanel
         columnColors = new int[WINDOW_WIDTH / COLUMN_WIDTH];
         randomizeArray();
 
-        setBackground(Color.DARK_GRAY);
+        setBackground(Color.BLACK);
     }
 
     void randomizeArray()
@@ -69,12 +69,12 @@ public class ArrayManager extends JPanel
         Graphics2D graphics = (Graphics2D) g;
         super.paintComponent(graphics);
 
-        g.setColor(Color.WHITE);
+        graphics.setColor(Color.WHITE);
         for(int i = 0; i < array.length - 1; i++)
         {
             int val = columnColors[i] * 2;
             graphics.setColor(new Color(255, 255 - val, 255 - val));
-            g.fillRect(i * COLUMN_WIDTH, WINDOW_HEIGHT, COLUMN_WIDTH, -array[i]);
+            graphics.fillRect(i * COLUMN_WIDTH, WINDOW_HEIGHT, COLUMN_WIDTH, -array[i]);
             if(columnColors[i] > 0)
             {
                 columnColors[i] -= 10;

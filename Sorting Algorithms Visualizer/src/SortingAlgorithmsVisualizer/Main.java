@@ -30,7 +30,7 @@ public class Main implements ActionListener
         arrayManager = new ArrayManager();
         window.add(arrayManager, BorderLayout.CENTER);
 
-        configInterface();
+        //configInterface();
 
         window.pack();
         window.setVisible(true);
@@ -46,7 +46,9 @@ public class Main implements ActionListener
         //new CountingSort().runSort(arrayManager);
         //new BucketSort().runSort(arrayManager);
         //new ShellSort().runSort(arrayManager);
-        new CombSort().runSort(arrayManager);
+        //new CombSort().runSort(arrayManager);
+        //new PigeonholeSort().runSort(arrayManager);
+        new CycleSort().runSort(arrayManager);
 
     }
 
