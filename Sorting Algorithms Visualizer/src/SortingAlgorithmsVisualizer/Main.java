@@ -48,7 +48,9 @@ public class Main implements ActionListener
         //new ShellSort().runSort(arrayManager);
         //new CombSort().runSort(arrayManager);
         //new PigeonholeSort().runSort(arrayManager);
-        new CycleSort().runSort(arrayManager);
+        //new CycleSort().runSort(arrayManager);
+        //new TimSort().runSort(arrayManager);
+        new CocktailSort().runSort(arrayManager);
 
     }
 
