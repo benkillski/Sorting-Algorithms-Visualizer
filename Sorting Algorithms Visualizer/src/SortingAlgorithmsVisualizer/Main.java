@@ -35,7 +35,6 @@ public class Main implements ActionListener
         window.pack();
         window.setVisible(true);
 
-
         //new SelectionSort().runSort(arrayManager);
         //new BubbleSort().runSort(arrayManager);
         //new InsertionSort().runSort(arrayManager);
@@ -54,8 +53,15 @@ public class Main implements ActionListener
         //new StrandSort().runSort(arrayManager);
         //new BitonicSort().runSort(arrayManager);
         //new PancakeSort().runSort(arrayManager);
-        new BogoSort().runSort(arrayManager);
-
+        //new BogoSort().runSort(arrayManager);
+        //new GnomeSort().runSort(arrayManager);
+        new SleepSort().runSort(arrayManager);
+        //new StructureSort().runSort(arrayManager);
+        //new StoogeSort().runSort(arrayManager);
+        //new TagSort().runSort(arrayManager);
+        //new TreeSort().runSort(arrayManager);
+        //new CartesianTreeSort().runSort(arrayManager);
+        //new BrickSort().runSort(arrayManager);
     }
 
     public static void main(String[] args)
