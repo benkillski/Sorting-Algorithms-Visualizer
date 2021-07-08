@@ -42,7 +42,8 @@ public class Main
         //new InsertionSort().runSort(arrayManager);
         //new MergeSort().runSort(arrayManager);
         //new HeapSort().runSort(arrayManager);
-        new QuickSort().runSort(arrayManager);
+        //new QuickSort().runSort(arrayManager);
+        new RadixSort().runSort(arrayManager);
 
     }
 
