@@ -1,47 +1,85 @@
 package SortingAlgorithmsVisualizer;
 
-import SortingAlgorithmsVisualizer.Algorithms.BubbleSort;
-
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Arrays;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class ArrayManager extends JPanel {
     public static final int WINDOW_WIDTH = 1525;
     public static final int WINDOW_HEIGHT = 700;
-    private static final int COLUMN_WIDTH = 10;
+    private static final int COLUMN_WIDTH = 8;
 
-    private static final long milliSecDelay = 20;
+    private static final long milliSecDelay = 50;
 
     private final int[] array;
-    private final int[] columnColors;
+    private final Color[] elementColors;
 
-    public ArrayManager() {
+    public ArrayManager()
+    {
         setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
 
         array = new int[WINDOW_WIDTH / COLUMN_WIDTH];
-        columnColors = new int[WINDOW_WIDTH / COLUMN_WIDTH];
+        elementColors = new Color[WINDOW_WIDTH / COLUMN_WIDTH];
         randomizeArray();
 
         setBackground(Color.BLACK);
     }
 
-    void randomizeArray() {
+    void randomizeArray()
+    {
         Random rand = new Random();
-        for (int i = 0; i < array.length - 1; i++) {
-            array[i] = rand.nextInt(WINDOW_HEIGHT - 1);
+        for (int i = 0; i < array.length - 1; i++)
+        {
+            array[i] = rand.nextInt(WINDOW_HEIGHT - 50);
+            revalidate();
+            repaint();
         }
     }
 
+    public void shuffle()
+    {
+        Random rand = ThreadLocalRandom.current();
+        for(int i = array.length - 1; i > 0; i--)
+        {
+            int index = rand.nextInt(i + 1);
+            int temp = array[index];
+            array[index] = array[i];
+            array[i] = temp;
+
+            revalidate();
+            repaint();
+            sleepForNanoSecs(milliSecDelay * 1000000);
+        }
+    }
+
+    //TODO: Add green color when sort check is successful
     boolean sortSuccess()
     {
         for(int i = 0; i < array.length - 1; i++)
         {
             if(array[i] > array[i + 1])
             {
+                for(int j = 0; i < elementColors.length - 1; i++)
+                {
+                    elementColors[i] = Color.RED;
+                }
                 return false;
             }
+            elementColors[i] = Color.GREEN;
+
+            revalidate();
+            repaint();
+
+            sleepForNanoSecs(milliSecDelay * 1000000);
         }
+        Arrays.fill(elementColors, Color.WHITE);
+
+        revalidate();
+        repaint();
         return true;
     }
 
@@ -51,10 +89,13 @@ public class ArrayManager extends JPanel {
         array[index1] = array[index2];
         array[index2] = temp;
 
-        columnColors[index1] = 100;
-        columnColors[index2] = 100;
+        Arrays.fill(elementColors, Color.WHITE);
+        elementColors[index1] = Color.RED;
+        elementColors[index2] = Color.RED;
 
+        revalidate();
         repaint();
+
         sleepForNanoSecs(milliSecDelay * 1000000);
     }
 
@@ -70,6 +111,7 @@ public class ArrayManager extends JPanel {
         while(timeElapsed < nanoSeconds);
     }
 
+
     @Override
     protected void paintComponent(Graphics g)
     {
@@ -79,14 +121,11 @@ public class ArrayManager extends JPanel {
         graphics.setColor(Color.WHITE);
         for(int i = 0; i < array.length - 1; i++)
         {
-            int val = columnColors[i] * 2;
-            graphics.setColor(new Color(255, 255 - val, 255 - val));
+            graphics.setColor(elementColors[i]);
             graphics.fillRect(i * COLUMN_WIDTH, WINDOW_HEIGHT, COLUMN_WIDTH, -array[i]);
-            if(columnColors[i] > 0)
-            {
-                columnColors[i] -= 10;
-            }
+
         }
+        graphics.dispose();
     }
 
     public int arrSize()
@@ -102,7 +141,9 @@ public class ArrayManager extends JPanel {
     public void setArrayValue(int index, int newValue)
     {
         array[index] = newValue;
-        columnColors[index] = 100;
+        Arrays.fill(elementColors, Color.WHITE);
+        elementColors[index] = Color.RED;
+        revalidate();
         repaint();
         sleepForNanoSecs(milliSecDelay * 1000000);
     }

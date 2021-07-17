@@ -2,10 +2,14 @@ package SortingAlgorithmsVisualizer.Algorithms;
 
 import SortingAlgorithmsVisualizer.ArrayManager;
 
-public class SelectionSort implements SortAlgorithm {
+import java.awt.*;
+
+public class SelectionSort implements SortAlgorithm
+{
     @Override
     public void runSort(ArrayManager array)
     {
+        System.out.println(Thread.currentThread().getName());
         int size = array.arrSize();
         for (int i = 0; i < size - 1; i++)
         {

@@ -2,6 +2,8 @@ package SortingAlgorithmsVisualizer.Algorithms;
 
 import SortingAlgorithmsVisualizer.ArrayManager;
 
+import java.awt.*;
+
 public class BubbleSort implements SortAlgorithm
 {
     @Override
