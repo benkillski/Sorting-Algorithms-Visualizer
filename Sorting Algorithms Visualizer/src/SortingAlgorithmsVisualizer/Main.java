@@ -1,24 +1,27 @@
 package SortingAlgorithmsVisualizer;
 
 import SortingAlgorithmsVisualizer.Algorithms.*;
-import javafx.scene.layout.Border;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+/**
+ * Main class that sets up the JFrame and all UI elements
+ * @author Ben Kilkowski
+ */
 public class Main implements ActionListener
 {
-    private final JFrame window;
-    private JPanel statBar;
+    private final JFrame window;    //JFrame object that is the core of all UI components.
+    private JPanel statBar;         //JPanel that displays and tracks information and data for each algorithm
 
-    JLabel algorithmDisplay;
-    //public static  JLabel comparisonsDisplay;
+    JLabel algorithmDisplay;        //JLabel that holds the name of the selected algorithm
+    //public static JLabel comparisonsDisplay;
 
+    //JButton components for UI
     JMenuBar sortAlgorithmTypesBar;
     JButton bitonicSortButton;
     JButton bogoSortButton;
@@ -41,17 +44,19 @@ public class Main implements ActionListener
     JButton shellSortButton;
     JButton stoogeSortButton;
     JButton timSortButton;
-
     JButton sortButton;
 
-    ArrayManager arrayManager;
-    SortAlgorithm selectedAlgorithm;
+    ArrayManager arrayManager;          //ArrayManager object that holds data for the array. It's also where the visualization is drawn.
+    SortAlgorithm selectedAlgorithm;    //Holds the SortAlgorithm object for the selected array
 
-    Executor executor;
-    Runnable sortRunnable;
+    Executor executor;                  //Object that reuses the same thread for sorting operations
+    Runnable sortRunnable;              //Runnable interface object that calls methods that involve sorting and redrawing graphics
 
-    private boolean canSort = true;
+    private boolean canSort = true;     //Determines whether user can sort the array. Used to prevent the creation of unneeded threads.
 
+    //
+    //Constructor for Main class, instantiates all JFrame and JFrame component objects
+    //
     public Main()
     {
         //JFrame and JFrame component initialization
@@ -60,10 +65,12 @@ public class Main implements ActionListener
         window.setLayout(new BorderLayout());
         window.setResizable(false);
 
+        //ArrayManager initialization
         arrayManager = new ArrayManager();
         arrayManager.setLayout(new BorderLayout());
         window.add(arrayManager, BorderLayout.CENTER);
 
+        //Initializes all JButtons for UI
         configUI();
 
         window.pack();
@@ -77,31 +84,34 @@ public class Main implements ActionListener
         executor = Executors.newSingleThreadExecutor();
         sortRunnable = () ->
         {
-            selectedAlgorithm.runSort(arrayManager);
-            System.out.println(arrayManager.sortSuccess());
-            arrayManager.shuffle();
-            canSort = true;
+            selectedAlgorithm.runSort(arrayManager);            //Sorts array and draws visualization
+            System.out.println(arrayManager.sortSuccess());     //Test if array was sorted corrected
+            arrayManager.shuffle();                             //Shuffles the array and redraws it
+            canSort = true;                                     //Allows array to be sorted again
         };
     }
 
     public static void main(String[] args)
     {
-        Main main = new Main();
+        Main main = new Main();     //Entry point to the program
     }
 
     //Instantiates and connects all buttons and UI elements to the JFrame
     //TODO: Finish UI Configuration
     private void configUI()
     {
+        //Stat bar instantiation
         statBar = new JPanel();
         statBar.setBackground(Color.BLACK);
         window.add(statBar, BorderLayout.NORTH);
 
+        //Algorithm name display JLabel initialization
         algorithmDisplay = new JLabel();
         algorithmDisplay.setForeground(Color.WHITE);
         algorithmDisplay.setFont(new Font(algorithmDisplay.getFont().getName(), Font.PLAIN, 25));
         statBar.add(algorithmDisplay);
 
+        //Spacing for statBar items
         JLabel gap = new JLabel("                              ");
         statBar.add(gap);
 
@@ -113,6 +123,7 @@ public class Main implements ActionListener
         sortAlgorithmTypesBar = new JMenuBar();
         window.setJMenuBar(sortAlgorithmTypesBar);
 
+        //JButton instantiations
         bubbleSortButton = new JButton("Bubble");
         bubbleSortButton.addActionListener(this);
         sortAlgorithmTypesBar.add(bubbleSortButton);
@@ -203,6 +214,9 @@ public class Main implements ActionListener
     }
 
     @Override
+    //
+    //  Listener method for all UI buttons
+    //
     public void actionPerformed(ActionEvent actionEvent)
     {
         if(actionEvent.getSource() == bubbleSortButton)
@@ -291,10 +305,10 @@ public class Main implements ActionListener
         }
         else if(actionEvent.getSource() == sortButton && canSort)
         {
-            canSort = false;
-            executor.execute(sortRunnable);
+            canSort = false;                    //Prevents user from sorting while a sort is in progress
+            executor.execute(sortRunnable);     //Starts a thread for sorting, bypassing EDT thread
         }
-        algorithmDisplay.setText(selectedAlgorithm.algorithmName());
+        algorithmDisplay.setText(selectedAlgorithm.algorithmName());    //Changes the algorithm name that is displayed on the stat bar
         arrayManager.repaint();
     }
 

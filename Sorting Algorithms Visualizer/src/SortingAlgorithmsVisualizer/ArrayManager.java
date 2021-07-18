@@ -6,19 +6,26 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ *Class holds all array data and draws graphical visualizations of the array
+ * @author Ben Kilkowski
+ */
 public class ArrayManager extends JPanel
 {
     public static final int WINDOW_WIDTH = 1520;
     public static final int WINDOW_HEIGHT = 700;
-    private static final int COLUMN_WIDTH = 20;
+    private static final int COLUMN_WIDTH = 20;         //Width of each graphical array element representation
 
-    private static final long milliSecDelay = 25;
+    private static final long milliSecDelay = 25;       //Used to determine the speed at which the visualization is ran
 
-    private final int[] array;
-    private final Color[] elementColors;
+    private final int[] array;                  //Array of elements to be sorted
+    private final Color[] elementColors;        //Color of each graphical array element representation
 
     //int numOfComparisions;
 
+    //
+    //  Constructor for ArrayManager class, creates and draws array for application start up
+    //
     public ArrayManager()
     {
         setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
@@ -30,6 +37,9 @@ public class ArrayManager extends JPanel
         setBackground(Color.BLACK);
     }
 
+    //
+    //  Generates random elements for the array
+    //
     void randomizeArray()
     {
         Random rand = new Random();
@@ -41,6 +51,9 @@ public class ArrayManager extends JPanel
         }
     }
 
+    //
+    //  Shuffles the array, causing it to be unsorted again
+    //
     public void shuffle()
     {
         Random rand = ThreadLocalRandom.current();
@@ -57,6 +70,9 @@ public class ArrayManager extends JPanel
         }
     }
 
+    //
+    //  Used to test whether the array was sorted correctly or not
+    //
     //TODO: Add green color when sort check is successful
     boolean sortSuccess()
     {
@@ -70,7 +86,7 @@ public class ArrayManager extends JPanel
                 }
                 return false;
             }
-            elementColors[i] = Color.GREEN;
+            elementColors[i] = Color.GREEN;     //Green indicating that the sort was successful
 
             revalidate();
             repaint();
@@ -86,14 +102,17 @@ public class ArrayManager extends JPanel
         return true;
     }
 
+    //
+    //  Swaps two array elements and updates it on screen
+    //
     public void swap(int index1, int index2)
     {
         int temp = array[index1];
         array[index1] = array[index2];
         array[index2] = temp;
 
-        Arrays.fill(elementColors, Color.WHITE);
-        elementColors[index1] = Color.RED;
+        Arrays.fill(elementColors, Color.WHITE);    //Resets all other elements as white while not being visited
+        elementColors[index1] = Color.RED;          //Red marks element as currently being swapped
         elementColors[index2] = Color.RED;
 
         revalidate();
@@ -102,6 +121,9 @@ public class ArrayManager extends JPanel
         sleepForNanoSecs(milliSecDelay * 1000000);
     }
 
+    //
+    //  Used for delays between array element changes
+    //
     public static void sleepForNanoSecs(long nanoSeconds)
     {
         long timeElapsed;
@@ -115,6 +137,10 @@ public class ArrayManager extends JPanel
     }
 
 
+    //
+    //  Handles drawing of the array visualization and is called everytime
+    //  there is a change in the array
+    //
     @Override
     protected void paintComponent(Graphics g)
     {
@@ -130,16 +156,25 @@ public class ArrayManager extends JPanel
         graphics.dispose();
     }
 
+    //
+    //  Returns the size of the array
+    //
     public int arrSize()
     {
         return array.length;
     }
 
+    //
+    //  Returns the array element at the specified index
+    //
     public int getArrValue(int index)
     {
         return array[index];
     }
 
+    //
+    //  Sets the array element at the specified index
+    //
     public void setArrayValue(int index, int newValue)
     {
         array[index] = newValue;
@@ -150,6 +185,9 @@ public class ArrayManager extends JPanel
         sleepForNanoSecs(milliSecDelay * 1000000);
     }
 
+    //
+    //  Returns the whole array
+    //
     public int[] getArray()
     {
         return array;
