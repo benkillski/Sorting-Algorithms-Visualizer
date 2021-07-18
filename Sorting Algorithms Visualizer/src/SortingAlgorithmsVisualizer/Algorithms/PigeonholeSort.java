@@ -1,6 +1,7 @@
 package SortingAlgorithmsVisualizer.Algorithms;
 
 import SortingAlgorithmsVisualizer.ArrayManager;
+import SortingAlgorithmsVisualizer.Main;
 
 import java.util.Arrays;
 
@@ -18,10 +19,14 @@ public class PigeonholeSort implements SortAlgorithm
         for(int a = 0; a < size; a++)
         {
             if(array.getArrValue(a) > max)
+            {
                 max = array.getArrValue(a);
+            }
 
             if(array.getArrValue(a) < min)
+            {
                 min = array.getArrValue(a);
+            }
         }
 
         range = max - min + 1;
@@ -33,14 +38,14 @@ public class PigeonholeSort implements SortAlgorithm
 
         index = 0;
 
-        for(j = 0; j<range; j++)
-            while(phole[j]-->0)
+        for(j = 0; j < range; j++)
+            while(phole[j]-- > 0)
                 array.setArrayValue(index++, j + min);
     }
 
     @Override
     public String algorithmName()
     {
-        return "Pigeonhole";
+        return "Pigeonhole Sort";
     }
 }

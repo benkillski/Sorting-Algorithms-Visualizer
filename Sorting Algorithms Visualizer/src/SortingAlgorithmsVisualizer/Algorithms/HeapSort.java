@@ -46,6 +46,6 @@ public class HeapSort implements SortAlgorithm
     @Override
     public String algorithmName()
     {
-        return "Heap";
+        return "Heap Sort";
     }
 }

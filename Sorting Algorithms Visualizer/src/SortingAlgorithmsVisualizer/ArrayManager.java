@@ -6,24 +6,25 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class ArrayManager extends JPanel {
-    public static final int WINDOW_WIDTH = 1525;
+public class ArrayManager extends JPanel
+{
+    public static final int WINDOW_WIDTH = 1520;
     public static final int WINDOW_HEIGHT = 700;
-    private static final int COLUMN_WIDTH = 8;
+    private static final int COLUMN_WIDTH = 20;
 
     private static final long milliSecDelay = 25;
 
     private final int[] array;
     private final Color[] elementColors;
 
-    int numOfComparisions;
+    //int numOfComparisions;
 
     public ArrayManager()
     {
         setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
 
-        array = new int[WINDOW_WIDTH / COLUMN_WIDTH];
-        elementColors = new Color[WINDOW_WIDTH / COLUMN_WIDTH];
+        array = new int[WINDOW_WIDTH / COLUMN_WIDTH - 2];
+        elementColors = new Color[array.length];
         randomizeArray();
 
         setBackground(Color.BLACK);
@@ -78,8 +79,8 @@ public class ArrayManager extends JPanel {
         }
         Arrays.fill(elementColors, Color.WHITE);
 
-        numOfComparisions = 0;
-        Main.comparisonsDisplay.setText("Comparisons: " + 0);
+        //numOfComparisions = 0;
+        //Main.comparisonsDisplay.setText("Comparisons: " + 0);
         revalidate();
         repaint();
         return true;
@@ -124,9 +125,8 @@ public class ArrayManager extends JPanel {
         for(int i = 0; i < array.length - 1; i++)
         {
             graphics.setColor(elementColors[i]);
-            graphics.fillRect(i * COLUMN_WIDTH, WINDOW_HEIGHT, COLUMN_WIDTH, -array[i]);
+            graphics.fillRect((i * COLUMN_WIDTH) + (COLUMN_WIDTH * 2), WINDOW_HEIGHT - 12, COLUMN_WIDTH, -array[i]);
         }
-
         graphics.dispose();
     }
 
@@ -155,13 +155,13 @@ public class ArrayManager extends JPanel {
         return array;
     }
 
-    public int getNumOfComparisions()
+    /*public int getNumOfComparisions()
     {
         return numOfComparisions;
-    }
+    }*/
 
-    public void setNumOfComparisions(int value)
+    /*public void setNumOfComparisions(int value)
     {
         numOfComparisions = value;
-    }
+    }*/
 }

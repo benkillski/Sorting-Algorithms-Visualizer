@@ -55,6 +55,6 @@ public class CycleSort implements SortAlgorithm
     @Override
     public String algorithmName()
     {
-        return "Cycle";
+        return "Cycle Sort";
     }
 }

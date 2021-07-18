@@ -13,6 +13,6 @@ public class BucketSort implements SortAlgorithm
     @Override
     public String algorithmName()
     {
-        return "Bucket";
+        return "Bucket Sort";
     }
 }

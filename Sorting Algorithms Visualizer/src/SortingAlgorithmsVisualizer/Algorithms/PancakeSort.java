@@ -1,6 +1,7 @@
 package SortingAlgorithmsVisualizer.Algorithms;
 
 import SortingAlgorithmsVisualizer.ArrayManager;
+import SortingAlgorithmsVisualizer.Main;
 
 public class PancakeSort implements SortAlgorithm
 {
@@ -28,7 +29,9 @@ public class PancakeSort implements SortAlgorithm
         int mi, i;
         for (mi = 0, i = 0; i < n; ++i)
             if (array.getArrValue(i) > array.getArrValue(mi))
+            {
                 mi = i;
+            }
         return mi;
     }
 
@@ -46,6 +49,6 @@ public class PancakeSort implements SortAlgorithm
     @Override
     public String algorithmName()
     {
-        return "Pancake";
+        return "Pancake Sort";
     }
 }

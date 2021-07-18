@@ -34,6 +34,6 @@ public class BogoSort implements SortAlgorithm
     @Override
     public String algorithmName()
     {
-        return "Bogo";
+        return "Bogo Sort";
     }
 }

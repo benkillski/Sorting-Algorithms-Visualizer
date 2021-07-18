@@ -53,6 +53,6 @@ public class BitonicSort implements SortAlgorithm
     @Override
     public String algorithmName()
     {
-        return "Bitonic";
+        return "Bitonic Sort";
     }
 }

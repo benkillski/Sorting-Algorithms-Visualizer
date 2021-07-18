@@ -27,6 +27,6 @@ public class ShellSort implements SortAlgorithm
     @Override
     public String algorithmName()
     {
-        return "Shell";
+        return "Shell sort";
     }
 }

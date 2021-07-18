@@ -1,6 +1,7 @@
 package SortingAlgorithmsVisualizer.Algorithms;
 
 import SortingAlgorithmsVisualizer.ArrayManager;
+import SortingAlgorithmsVisualizer.Main;
 
 public class TimSort implements SortAlgorithm
 {
@@ -20,15 +21,15 @@ public class TimSort implements SortAlgorithm
 
         for (int size = minRun; size < n; size = 2 * size)
         {
-            for (int left = 0; left < n;
-                 left += 2 * size)
+            for (int left = 0; left < n; left += 2 * size)
             {
                 int mid = left + size - 1;
-                int right = Math.min((left + 2 * size - 1),
-                        (n - 1));
+                int right = Math.min((left + 2 * size - 1), (n - 1));
 
                 if(mid < right)
+                {
                     merge(array, left, mid, right);
+                }
             }
         }
     }
@@ -48,14 +49,17 @@ public class TimSort implements SortAlgorithm
         }
     }
 
-    public static void merge(ArrayManager array, int l, int m, int r) {
+    public static void merge(ArrayManager array, int l, int m, int r)
+    {
         int len1 = m - l + 1, len2 = r - m;
         int[] left = new int[len1];
         int[] right = new int[len2];
-        for (int x = 0; x < len1; x++) {
+        for (int x = 0; x < len1; x++)
+        {
             left[x] = array.getArrValue(l + x);
         }
-        for (int x = 0; x < len2; x++) {
+        for (int x = 0; x < len2; x++)
+        {
             right[x] = array.getArrValue(m + 1 + x);
         }
 
@@ -63,24 +67,29 @@ public class TimSort implements SortAlgorithm
         int j = 0;
         int k = l;
 
-        while (i < len1 && j < len2) {
-            if (left[i] <= right[j]) {
+        while (i < len1 && j < len2)
+        {
+            if (left[i] <= right[j])
+            {
                 array.setArrayValue(k, left[i]);
                 i++;
-            } else {
+            }
+            else {
                 array.setArrayValue(k, right[j]);
                 j++;
             }
             k++;
         }
 
-        while (i < len1) {
+        while (i < len1)
+        {
             array.setArrayValue(k, left[i]);
             k++;
             i++;
         }
 
-        while (j < len2) {
+        while (j < len2)
+        {
             array.setArrayValue(k, right[j]);
             k++;
             j++;
@@ -104,6 +113,6 @@ public class TimSort implements SortAlgorithm
     @Override
     public String algorithmName()
     {
-        return "Tim";
+        return "Tim sort";
     }
 }

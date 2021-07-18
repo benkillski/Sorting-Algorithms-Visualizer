@@ -46,6 +46,6 @@ public class CocktailSort implements SortAlgorithm
     @Override
     public String algorithmName()
     {
-        return "Cocktail";
+        return "Cocktail Sort";
     }
 }

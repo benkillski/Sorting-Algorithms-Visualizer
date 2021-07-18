@@ -39,6 +39,6 @@ public class CountingSort implements SortAlgorithm
     @Override
     public String algorithmName()
     {
-        return "Counting";
+        return "Counting Sort";
     }
 }

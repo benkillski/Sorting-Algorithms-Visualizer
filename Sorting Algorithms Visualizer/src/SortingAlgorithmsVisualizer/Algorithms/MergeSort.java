@@ -64,6 +64,6 @@ public class MergeSort implements SortAlgorithm
     @Override
     public String algorithmName()
     {
-        return "Merge";
+        return "Merge Sort";
     }
 }

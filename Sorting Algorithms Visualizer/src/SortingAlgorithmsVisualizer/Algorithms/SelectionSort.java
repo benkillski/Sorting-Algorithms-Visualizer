@@ -19,9 +19,6 @@ public class SelectionSort implements SortAlgorithm
             for (int j = i + 1; j < size; j++)
                 if (array.getArrValue(j) < array.getArrValue(minIndex))
                 {
-                    array.setNumOfComparisions(array.getNumOfComparisions() + 1);
-                    Main.comparisonsDisplay.setText("Comparisons: " + array.getNumOfComparisions());
-
                     minIndex = j;
                 }
 

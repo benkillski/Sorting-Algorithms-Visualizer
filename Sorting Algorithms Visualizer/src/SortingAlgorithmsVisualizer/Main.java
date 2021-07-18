@@ -17,7 +17,7 @@ public class Main implements ActionListener
     private JPanel statBar;
 
     JLabel algorithmDisplay;
-    public static JLabel comparisonsDisplay;
+    //public static  JLabel comparisonsDisplay;
 
     JMenuBar sortAlgorithmTypesBar;
     JButton bitonicSortButton;
@@ -105,10 +105,10 @@ public class Main implements ActionListener
         JLabel gap = new JLabel("                              ");
         statBar.add(gap);
 
-        comparisonsDisplay = new JLabel("Comparisons: " + arrayManager.getNumOfComparisions());
+        /*comparisonsDisplay = new JLabel("Comparisons: " + arrayManager.getNumOfComparisions());
         comparisonsDisplay.setForeground(Color.WHITE);
         comparisonsDisplay.setFont(new Font(comparisonsDisplay.getFont().getName(), Font.PLAIN, 25));
-        statBar.add(comparisonsDisplay);
+        statBar.add(comparisonsDisplay);*/
 
         sortAlgorithmTypesBar = new JMenuBar();
         window.setJMenuBar(sortAlgorithmTypesBar);
@@ -229,6 +229,66 @@ public class Main implements ActionListener
         {
             selectedAlgorithm = new QuickSort();
         }
+        else if(actionEvent.getSource() == radixSortButton)
+        {
+            selectedAlgorithm = new RadixSort();
+        }
+        else if(actionEvent.getSource() == countingSortButton)
+        {
+            selectedAlgorithm = new CountingSort();
+        }
+        else if(actionEvent.getSource() == bucketSortButton)
+        {
+            selectedAlgorithm = new BucketSort();
+        }
+        else if(actionEvent.getSource() == shellSortButton)
+        {
+            selectedAlgorithm = new ShellSort();
+        }
+        else if(actionEvent.getSource() == combSortButton)
+        {
+            selectedAlgorithm = new CombSort();
+        }
+        else if(actionEvent.getSource() == pigeonholeSortButton)
+        {
+            selectedAlgorithm = new PigeonholeSort();
+        }
+        else if(actionEvent.getSource() == cycleSortButton)
+        {
+            selectedAlgorithm = new CycleSort();
+        }
+        else if(actionEvent.getSource() == timSortButton)
+        {
+            selectedAlgorithm = new TimSort();
+        }
+        else if(actionEvent.getSource() == cocktailSortButton)
+        {
+            selectedAlgorithm = new CocktailSort();
+        }
+        else if(actionEvent.getSource() == bitonicSortButton)
+        {
+            selectedAlgorithm = new BitonicSort();
+        }
+        else if(actionEvent.getSource() == pancakeSortButton)
+        {
+            selectedAlgorithm = new PancakeSort();
+        }
+        else if(actionEvent.getSource() == bogoSortButton)
+        {
+            selectedAlgorithm = new BogoSort();
+        }
+        else if(actionEvent.getSource() == gnomeSortButton)
+        {
+            selectedAlgorithm = new GnomeSort();
+        }
+        else if(actionEvent.getSource() == stoogeSortButton)
+        {
+            selectedAlgorithm = new StoogeSort();
+        }
+        else if(actionEvent.getSource() == brickSortButton)
+        {
+            selectedAlgorithm = new BrickSort();
+        }
         else if(actionEvent.getSource() == sortButton && canSort)
         {
             canSort = false;
@@ -238,8 +298,8 @@ public class Main implements ActionListener
         arrayManager.repaint();
     }
 
-    public void setComparisonDisplay(int value)
+    /*public void setComparisonDisplay(int value)
     {
         comparisonsDisplay.setText("Comparision " + value);
-    }
+    }*/
 }

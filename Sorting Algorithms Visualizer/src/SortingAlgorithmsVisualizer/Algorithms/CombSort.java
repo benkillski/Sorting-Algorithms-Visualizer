@@ -44,6 +44,6 @@ public class CombSort implements SortAlgorithm
     @Override
     public String algorithmName()
     {
-        return "Comb";
+        return "Comb Sort";
     }
 }

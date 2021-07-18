@@ -1,6 +1,7 @@
 package SortingAlgorithmsVisualizer.Algorithms;
 
 import SortingAlgorithmsVisualizer.ArrayManager;
+import SortingAlgorithmsVisualizer.Main;
 
 public class QuickSort implements SortAlgorithm
 {
@@ -42,6 +43,6 @@ public class QuickSort implements SortAlgorithm
     @Override
     public String algorithmName()
     {
-        return "Quick";
+        return "Quick Sort";
     }
 }

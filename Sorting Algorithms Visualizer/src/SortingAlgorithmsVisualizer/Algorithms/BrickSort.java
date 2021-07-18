@@ -40,6 +40,6 @@ public class BrickSort implements SortAlgorithm
     @Override
     public String algorithmName()
     {
-        return "Brick";
+        return "Brick Sort";
     }
 }

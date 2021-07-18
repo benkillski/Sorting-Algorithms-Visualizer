@@ -1,8 +1,8 @@
 package SortingAlgorithmsVisualizer.Algorithms;
 
 import SortingAlgorithmsVisualizer.ArrayManager;
+import SortingAlgorithmsVisualizer.Main;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class RadixSort implements SortAlgorithm
@@ -49,7 +49,9 @@ public class RadixSort implements SortAlgorithm
         int max = array.getArrValue(0);
         for(int i = 1; i < n; i++) {
             if (array.getArrValue(i) > max)
+            {
                 max = array.getArrValue(i);
+            }
         }
         return max;
     }
@@ -57,6 +59,6 @@ public class RadixSort implements SortAlgorithm
     @Override
     public String algorithmName()
     {
-        return "Radix";
+        return "Radix Sort";
     }
 }

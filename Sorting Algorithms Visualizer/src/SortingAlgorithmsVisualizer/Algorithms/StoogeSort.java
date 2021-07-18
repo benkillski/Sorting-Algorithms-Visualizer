@@ -1,6 +1,7 @@
 package SortingAlgorithmsVisualizer.Algorithms;
 
 import SortingAlgorithmsVisualizer.ArrayManager;
+import SortingAlgorithmsVisualizer.Main;
 
 import java.lang.reflect.Array;
 
@@ -15,10 +16,14 @@ public class StoogeSort implements SortAlgorithm
     private void stoogeSort(ArrayManager array, int l, int h)
     {
         if (l >= h)
+        {
             return;
+        }
 
         if (array.getArrValue(l) > array.getArrValue(h))
+        {
             array.swap(l, h);
+        }
 
         if (h - l + 1 > 2)
         {
@@ -35,6 +40,6 @@ public class StoogeSort implements SortAlgorithm
     @Override
     public String algorithmName()
     {
-        return null;
+        return "Stooge sort";
     }
 }

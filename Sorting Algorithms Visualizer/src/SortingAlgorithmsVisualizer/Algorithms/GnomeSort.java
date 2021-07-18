@@ -31,6 +31,6 @@ public class GnomeSort implements SortAlgorithm
     @Override
     public String algorithmName()
     {
-        return "Gnome";
+        return "Gnome Sort";
     }
 }

@@ -28,6 +28,6 @@ public class InsertionSort implements SortAlgorithm
     @Override
     public String algorithmName()
     {
-        return "Insertion";
+        return "Insertion Sort";
     }
 }
