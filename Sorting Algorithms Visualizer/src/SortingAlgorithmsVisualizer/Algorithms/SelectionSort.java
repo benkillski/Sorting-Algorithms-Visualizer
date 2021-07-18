@@ -1,6 +1,7 @@
 package SortingAlgorithmsVisualizer.Algorithms;
 
 import SortingAlgorithmsVisualizer.ArrayManager;
+import SortingAlgorithmsVisualizer.Main;
 
 import java.awt.*;
 
@@ -17,7 +18,12 @@ public class SelectionSort implements SortAlgorithm
             int minIndex = i;
             for (int j = i + 1; j < size; j++)
                 if (array.getArrValue(j) < array.getArrValue(minIndex))
+                {
+                    array.setNumOfComparisions(array.getNumOfComparisions() + 1);
+                    Main.comparisonsDisplay.setText("Comparisons: " + array.getNumOfComparisions());
+
                     minIndex = j;
+                }
 
             // Swap the found minimum element with the first element
             array.swap(minIndex, i);
@@ -27,6 +33,6 @@ public class SelectionSort implements SortAlgorithm
     @Override
     public String algorithmName()
     {
-        return "Selection";
+        return "Selection Sort";
     }
 }

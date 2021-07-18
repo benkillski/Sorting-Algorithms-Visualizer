@@ -1,8 +1,10 @@
 package SortingAlgorithmsVisualizer;
 
 import SortingAlgorithmsVisualizer.Algorithms.*;
+import javafx.scene.layout.Border;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +14,10 @@ import java.util.concurrent.Executors;
 public class Main implements ActionListener
 {
     private final JFrame window;
+    private JPanel statBar;
+
+    JLabel algorithmDisplay;
+    public static JLabel comparisonsDisplay;
 
     JMenuBar sortAlgorithmTypesBar;
     JButton bitonicSortButton;
@@ -42,7 +48,6 @@ public class Main implements ActionListener
     SortAlgorithm selectedAlgorithm;
 
     Executor executor;
-    Thread antiEDT;
     Runnable sortRunnable;
 
     private boolean canSort = true;
@@ -56,6 +61,7 @@ public class Main implements ActionListener
         window.setResizable(false);
 
         arrayManager = new ArrayManager();
+        arrayManager.setLayout(new BorderLayout());
         window.add(arrayManager, BorderLayout.CENTER);
 
         configUI();
@@ -63,6 +69,11 @@ public class Main implements ActionListener
         window.pack();
         window.setVisible(true);
 
+        //Default algorithm upon program execution
+        selectedAlgorithm = new BubbleSort();
+        algorithmDisplay.setText(selectedAlgorithm.algorithmName());
+
+        //Initialization for the sort logic thread
         executor = Executors.newSingleThreadExecutor();
         sortRunnable = () ->
         {
@@ -78,11 +89,29 @@ public class Main implements ActionListener
         Main main = new Main();
     }
 
+    //Instantiates and connects all buttons and UI elements to the JFrame
     //TODO: Finish UI Configuration
     private void configUI()
     {
+        statBar = new JPanel();
+        statBar.setBackground(Color.BLACK);
+        window.add(statBar, BorderLayout.NORTH);
+
+        algorithmDisplay = new JLabel();
+        algorithmDisplay.setForeground(Color.WHITE);
+        algorithmDisplay.setFont(new Font(algorithmDisplay.getFont().getName(), Font.PLAIN, 25));
+        statBar.add(algorithmDisplay);
+
+        JLabel gap = new JLabel("                              ");
+        statBar.add(gap);
+
+        comparisonsDisplay = new JLabel("Comparisons: " + arrayManager.getNumOfComparisions());
+        comparisonsDisplay.setForeground(Color.WHITE);
+        comparisonsDisplay.setFont(new Font(comparisonsDisplay.getFont().getName(), Font.PLAIN, 25));
+        statBar.add(comparisonsDisplay);
+
         sortAlgorithmTypesBar = new JMenuBar();
-        window.add(sortAlgorithmTypesBar, BorderLayout.SOUTH);
+        window.setJMenuBar(sortAlgorithmTypesBar);
 
         bubbleSortButton = new JButton("Bubble");
         bubbleSortButton.addActionListener(this);
@@ -170,7 +199,7 @@ public class Main implements ActionListener
 
         sortButton = new JButton("SORT");
         sortButton.addActionListener(this);
-        window.add(sortButton, BorderLayout.NORTH);
+        window.add(sortButton, BorderLayout.SOUTH);
     }
 
     @Override
@@ -203,9 +232,14 @@ public class Main implements ActionListener
         else if(actionEvent.getSource() == sortButton && canSort)
         {
             canSort = false;
-            //antiEDT = new Thread(sortRunnable);
-            //antiEDT.start();
             executor.execute(sortRunnable);
         }
+        algorithmDisplay.setText(selectedAlgorithm.algorithmName());
+        arrayManager.repaint();
+    }
+
+    public void setComparisonDisplay(int value)
+    {
+        comparisonsDisplay.setText("Comparision " + value);
     }
 }

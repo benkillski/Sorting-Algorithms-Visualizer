@@ -2,8 +2,6 @@ package SortingAlgorithmsVisualizer;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
@@ -13,10 +11,12 @@ public class ArrayManager extends JPanel {
     public static final int WINDOW_HEIGHT = 700;
     private static final int COLUMN_WIDTH = 8;
 
-    private static final long milliSecDelay = 50;
+    private static final long milliSecDelay = 25;
 
     private final int[] array;
     private final Color[] elementColors;
+
+    int numOfComparisions;
 
     public ArrayManager()
     {
@@ -78,6 +78,8 @@ public class ArrayManager extends JPanel {
         }
         Arrays.fill(elementColors, Color.WHITE);
 
+        numOfComparisions = 0;
+        Main.comparisonsDisplay.setText("Comparisons: " + 0);
         revalidate();
         repaint();
         return true;
@@ -123,8 +125,8 @@ public class ArrayManager extends JPanel {
         {
             graphics.setColor(elementColors[i]);
             graphics.fillRect(i * COLUMN_WIDTH, WINDOW_HEIGHT, COLUMN_WIDTH, -array[i]);
-
         }
+
         graphics.dispose();
     }
 
@@ -151,5 +153,15 @@ public class ArrayManager extends JPanel {
     public int[] getArray()
     {
         return array;
+    }
+
+    public int getNumOfComparisions()
+    {
+        return numOfComparisions;
+    }
+
+    public void setNumOfComparisions(int value)
+    {
+        numOfComparisions = value;
     }
 }
