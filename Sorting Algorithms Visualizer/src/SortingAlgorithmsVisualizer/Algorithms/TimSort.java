@@ -1,7 +1,6 @@
 package SortingAlgorithmsVisualizer.Algorithms;
 
 import SortingAlgorithmsVisualizer.ArrayManager;
-import SortingAlgorithmsVisualizer.Main;
 
 public class TimSort implements SortAlgorithm
 {
@@ -10,24 +9,32 @@ public class TimSort implements SortAlgorithm
     @Override
     public void runSort(ArrayManager array)
     {
-        int n = array.arrSize();
+        int n = array.getArraySize();
 
         int minRun = minRunLength(MIN_MERGE);
 
         for (int i = 0; i < n; i += minRun)
         {
+            array.setNumOfIterations(array.getNumOfIterations() + 1);
+
             insertionSort(array, i, Math.min((i + MIN_MERGE - 1), (n - 1)));
         }
 
         for (int size = minRun; size < n; size = 2 * size)
         {
+            array.setNumOfIterations(array.getNumOfIterations() + 1);
+
             for (int left = 0; left < n; left += 2 * size)
             {
+                array.setNumOfIterations(array.getNumOfIterations() + 1);
+
                 int mid = left + size - 1;
                 int right = Math.min((left + 2 * size - 1), (n - 1));
 
                 if(mid < right)
                 {
+                    array.setNumOfComparisions(array.getNumOfComparisions() + 1);
+
                     merge(array, left, mid, right);
                 }
             }
@@ -38,11 +45,16 @@ public class TimSort implements SortAlgorithm
     {
         for (int i = left + 1; i <= right; i++)
         {
-            int temp = array.getArrValue(i);
+            array.setNumOfIterations(array.getNumOfIterations() + 1);
+
+            int temp = array.getArrayValue(i);
             int j = i - 1;
-            while (j >= left && array.getArrValue(j) > temp)
+            while (j >= left && array.getArrayValue(j) > temp)
             {
-                array.setArrayValue(j + 1, array.getArrValue(j));
+                array.setNumOfIterations(array.getNumOfIterations() + 1);
+                array.setNumOfComparisions(array.getNumOfComparisions() + 1);
+
+                array.setArrayValue(j + 1, array.getArrayValue(j));
                 j--;
             }
             array.setArrayValue(j + 1, temp);
@@ -56,11 +68,15 @@ public class TimSort implements SortAlgorithm
         int[] right = new int[len2];
         for (int x = 0; x < len1; x++)
         {
-            left[x] = array.getArrValue(l + x);
+            array.setNumOfIterations(array.getNumOfIterations() + 1);
+
+            left[x] = array.getArrayValue(l + x);
         }
         for (int x = 0; x < len2; x++)
         {
-            right[x] = array.getArrValue(m + 1 + x);
+            array.setNumOfIterations(array.getNumOfIterations() + 1);
+
+            right[x] = array.getArrayValue(m + 1 + x);
         }
 
         int i = 0;
@@ -69,8 +85,13 @@ public class TimSort implements SortAlgorithm
 
         while (i < len1 && j < len2)
         {
+            array.setNumOfIterations(array.getNumOfIterations() + 1);
+            array.setNumOfComparisions(array.getNumOfComparisions() + 1);
+
             if (left[i] <= right[j])
             {
+                array.setNumOfComparisions(array.getNumOfComparisions() + 1);
+
                 array.setArrayValue(k, left[i]);
                 i++;
             }
@@ -83,6 +104,9 @@ public class TimSort implements SortAlgorithm
 
         while (i < len1)
         {
+            array.setNumOfIterations(array.getNumOfIterations() + 1);
+            array.setNumOfComparisions(array.getNumOfComparisions() + 1);
+
             array.setArrayValue(k, left[i]);
             k++;
             i++;
@@ -90,6 +114,9 @@ public class TimSort implements SortAlgorithm
 
         while (j < len2)
         {
+            array.setNumOfIterations(array.getNumOfIterations() + 1);
+            array.setNumOfComparisions(array.getNumOfComparisions() + 1);
+
             array.setArrayValue(k, right[j]);
             k++;
             j++;
@@ -111,7 +138,7 @@ public class TimSort implements SortAlgorithm
     }
 
     @Override
-    public String algorithmName()
+    public String getAlgorithmName()
     {
         return "Tim sort";
     }

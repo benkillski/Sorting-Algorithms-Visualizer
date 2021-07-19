@@ -11,7 +11,7 @@ public class StrandSort implements SortAlgorithm
     }
 
     @Override
-    public String algorithmName()
+    public String getAlgorithmName()
     {
         return "Strand";
     }

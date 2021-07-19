@@ -11,7 +11,7 @@ public class BucketSort implements SortAlgorithm
     }
 
     @Override
-    public String algorithmName()
+    public String getAlgorithmName()
     {
         return "Bucket Sort";
     }

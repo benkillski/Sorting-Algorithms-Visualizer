@@ -13,31 +13,39 @@ public class CountingSort implements SortAlgorithm
         int min = Arrays.stream(array.getArray()).min().getAsInt();
         int range = max - min + 1;
         int count[] = new int[range];
-        int output[] = new int[array.arrSize()];
-        for (int i = 0; i < array.arrSize(); i++)
+        int output[] = new int[array.getArraySize()];
+        for (int i = 0; i < array.getArraySize(); i++)
         {
-            count[array.getArrValue(i) - min]++;
+            array.setNumOfIterations(array.getNumOfIterations() + 1);
+
+            count[array.getArrayValue(i) - min]++;
         }
 
         for (int i = 1; i < count.length; i++)
         {
+            array.setNumOfIterations(array.getNumOfIterations() + 1);
+
             count[i] += count[i - 1];
         }
 
-        for (int i = array.arrSize() - 1; i >= 0; i--)
+        for (int i = array.getArraySize() - 1; i >= 0; i--)
         {
-            output[count[array.getArrValue(i) - min] - 1] = array.getArrValue(i);
-            count[array.getArrValue(i) - min]--;
+            array.setNumOfIterations(array.getNumOfIterations() + 1);
+
+            output[count[array.getArrayValue(i) - min] - 1] = array.getArrayValue(i);
+            count[array.getArrayValue(i) - min]--;
         }
 
-        for (int i = 0; i < array.arrSize(); i++)
+        for (int i = 0; i < array.getArraySize(); i++)
         {
+            array.setNumOfIterations(array.getNumOfIterations() + 1);
+
             array.setArrayValue(i, output[i]);
         }
     }
 
     @Override
-    public String algorithmName()
+    public String getAlgorithmName()
     {
         return "Counting Sort";
     }

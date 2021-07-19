@@ -14,23 +14,27 @@ public class ArrayManager extends JPanel
 {
     public static final int WINDOW_WIDTH = 1520;
     public static final int WINDOW_HEIGHT = 700;
-    private static final int COLUMN_WIDTH = 20;         //Width of each graphical array element representation
+    private static final int COLUMN_WIDTH = 10;         //Width of each graphical array element representation
 
-    private static final long milliSecDelay = 25;       //Used to determine the speed at which the visualization is ran
+    private static long milliSecDelay = 25;    //Used to determine the speed at which the visualization is ran
 
     private final int[] array;                  //Array of elements to be sorted
     private final Color[] elementColors;        //Color of each graphical array element representation
 
-    //int numOfComparisions;
+    int numOfComparisions;
+    int numOfIterations;
 
     //
     //  Constructor for ArrayManager class, creates and draws array for application start up
     //
     public ArrayManager()
     {
+        numOfComparisions = 0;
+        numOfIterations = 0;
+
         setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
 
-        array = new int[WINDOW_WIDTH / COLUMN_WIDTH - 2];
+        array = new int[(WINDOW_WIDTH / COLUMN_WIDTH)  - 2];
         elementColors = new Color[array.length];
         randomizeArray();
 
@@ -45,10 +49,10 @@ public class ArrayManager extends JPanel
         Random rand = new Random();
         for (int i = 0; i < array.length - 1; i++)
         {
-            array[i] = rand.nextInt(WINDOW_HEIGHT - 50);
-            revalidate();
-            repaint();
+            array[i] = rand.nextInt(WINDOW_HEIGHT - 50) + 1;
         }
+        revalidate();
+        repaint();
     }
 
     //
@@ -59,6 +63,9 @@ public class ArrayManager extends JPanel
         Random rand = ThreadLocalRandom.current();
         for(int i = array.length - 1; i > 0; i--)
         {
+            numOfComparisions = 0;
+            numOfIterations = 0;
+
             int index = rand.nextInt(i + 1);
             int temp = array[index];
             array[index] = array[i];
@@ -73,7 +80,6 @@ public class ArrayManager extends JPanel
     //
     //  Used to test whether the array was sorted correctly or not
     //
-    //TODO: Add green color when sort check is successful
     boolean sortSuccess()
     {
         for(int i = 0; i < array.length - 1; i++)
@@ -93,10 +99,9 @@ public class ArrayManager extends JPanel
 
             sleepForNanoSecs(milliSecDelay * 1000000);
         }
+        sleepForNanoSecs(100000 * 1000000);
         Arrays.fill(elementColors, Color.WHITE);
 
-        //numOfComparisions = 0;
-        //Main.comparisonsDisplay.setText("Comparisons: " + 0);
         revalidate();
         repaint();
         return true;
@@ -147,6 +152,9 @@ public class ArrayManager extends JPanel
         Graphics2D graphics = (Graphics2D) g;
         super.paintComponent(graphics);
 
+        Main.comparisonsDisplay.setText("Comparisons: " + numOfComparisions);
+        Main.iterationsDisplay.setText("Iterations: " + numOfIterations);
+
         graphics.setColor(Color.WHITE);
         for(int i = 0; i < array.length - 1; i++)
         {
@@ -159,7 +167,7 @@ public class ArrayManager extends JPanel
     //
     //  Returns the size of the array
     //
-    public int arrSize()
+    public int getArraySize()
     {
         return array.length;
     }
@@ -167,7 +175,7 @@ public class ArrayManager extends JPanel
     //
     //  Returns the array element at the specified index
     //
-    public int getArrValue(int index)
+    public int getArrayValue(int index)
     {
         return array[index];
     }
@@ -193,13 +201,51 @@ public class ArrayManager extends JPanel
         return array;
     }
 
-    /*public int getNumOfComparisions()
+    //
+    //  Returns the current milliSecDelay
+    //
+    public long getMilliSecDelay()
+    {
+        return milliSecDelay;
+    }
+
+    //
+    //  Sets the current milliSecDelay
+    //
+    public void setMilliSecDelay(long delay)
+    {
+        milliSecDelay = delay;
+    }
+
+    //
+    //  Returns the current number of comparisons
+    //
+    public int getNumOfComparisions()
     {
         return numOfComparisions;
-    }*/
+    }
 
-    /*public void setNumOfComparisions(int value)
+    //
+    //  Sets the number of comparisons
+    //
+    public void setNumOfComparisions(int value)
     {
         numOfComparisions = value;
-    }*/
+    }
+
+    //
+    //  Returns the current number of iterations
+    //
+    public int getNumOfIterations()
+    {
+        return numOfIterations;
+    }
+
+    //
+    //  Sets the number of iterations
+    //
+    public void setNumOfIterations(int value)
+    {
+        numOfIterations = value;
+    }
 }

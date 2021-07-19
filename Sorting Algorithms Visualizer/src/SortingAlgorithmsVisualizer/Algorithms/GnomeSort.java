@@ -8,19 +8,29 @@ public class GnomeSort implements SortAlgorithm
     public void runSort(ArrayManager array)
     {
         int index = 0;
-        int n = array.arrSize();
+        int n = array.getArraySize();
 
-        while (index < n) {
+        while (index < n)
+        {
+            array.setNumOfIterations(array.getNumOfIterations() + 1);
+            array.setNumOfComparisions(array.getNumOfComparisions() + 1);
+
             if (index == 0)
             {
+                array.setNumOfComparisions(array.getNumOfComparisions() + 1);
+
                 index++;
             }
-            if (array.getArrValue(index) >= array.getArrValue(index - 1))
+            if (array.getArrayValue(index) >= array.getArrayValue(index - 1))
             {
+                array.setNumOfComparisions(array.getNumOfComparisions() + 1);
+
                 index++;
             }
             else
             {
+                array.setNumOfComparisions(array.getNumOfComparisions() + 1);
+
                 array.swap(index, index - 1);
                 index--;
             }
@@ -29,7 +39,7 @@ public class GnomeSort implements SortAlgorithm
     }
 
     @Override
-    public String algorithmName()
+    public String getAlgorithmName()
     {
         return "Gnome Sort";
     }

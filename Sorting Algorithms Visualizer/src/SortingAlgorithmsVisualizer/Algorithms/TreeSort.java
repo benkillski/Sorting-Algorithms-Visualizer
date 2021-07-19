@@ -12,7 +12,7 @@ public class TreeSort implements SortAlgorithm
         //tree.treeins(array);
         //tree.inorderRec(tree.root);
 
-        treeSort(array, array.arrSize());
+        treeSort(array, array.getArraySize());
     }
 
     private void treeSort(ArrayManager array, int n)
@@ -26,7 +26,7 @@ public class TreeSort implements SortAlgorithm
     }
 
     @Override
-    public String algorithmName()
+    public String getAlgorithmName()
     {
         return "Tree";
     }
@@ -73,9 +73,9 @@ public class TreeSort implements SortAlgorithm
 
         void treeins(ArrayManager array)
         {
-            for(int i = 0; i < array.arrSize(); i++)
+            for(int i = 0; i < array.getArraySize(); i++)
             {
-                insert(array.getArrValue(i));
+                insert(array.getArrayValue(i));
             }
         }
 

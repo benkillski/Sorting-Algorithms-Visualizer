@@ -7,44 +7,87 @@ public class CycleSort implements SortAlgorithm
     @Override
     public void runSort(ArrayManager array)
     {
-        int size = array.arrSize();
+        int size = array.getArraySize();
 
         int writes = 0;
 
-        for (int cycle_start = 0; cycle_start <= size - 2; cycle_start++) {
-            int item = array.getArrValue(cycle_start);
+        for (int cycle_start = 0; cycle_start <= size - 2; cycle_start++)
+        {
+            array.setNumOfIterations(array.getNumOfIterations() + 1);
+
+            int item = array.getArrayValue(cycle_start);
 
             int pos = cycle_start;
             for (int i = cycle_start + 1; i < size; i++)
-                if (array.getArrValue(i) < item)
+            {
+                array.setNumOfIterations(array.getNumOfIterations() + 1);
+
+                if (array.getArrayValue(i) < item)
+                {
+                    array.setNumOfComparisions(array.getNumOfComparisions() + 1);
+
                     pos++;
+                }
+            }
 
             if (pos == cycle_start)
+            {
+                array.setNumOfComparisions(array.getNumOfComparisions() + 1);
+
                 continue;
+            }
 
-            while (item == array.getArrValue(pos))
+            while (item == array.getArrayValue(pos))
+            {
+                array.setNumOfIterations(array.getNumOfIterations() + 1);
+                array.setNumOfComparisions(array.getNumOfComparisions() + 1);
+
                 pos += 1;
+            }
 
-            if (pos != cycle_start) {
+            if (pos != cycle_start)
+            {
+                array.setNumOfComparisions(array.getNumOfComparisions() + 1);
+
                 int temp = item;
-                item = array.getArrValue(pos);
+                item = array.getArrayValue(pos);
                 array.setArrayValue(pos, temp);
                 writes++;
             }
 
-            while (pos != cycle_start) {
+            while (pos != cycle_start)
+            {
+                array.setNumOfIterations(array.getNumOfIterations() + 1);
+                array.setNumOfComparisions(array.getNumOfComparisions() + 1);
+
                 pos = cycle_start;
 
                 for (int i = cycle_start + 1; i < size; i++)
-                    if (array.getArrValue(i) < item)
+                {
+                    array.setNumOfIterations(array.getNumOfIterations() + 1);
+
+                    if (array.getArrayValue(i) < item)
+                    {
+                        array.setNumOfComparisions(array.getNumOfComparisions() + 1);
+
                         pos += 1;
+                    }
+                }
 
-                while (item == array.getArrValue(pos))
+                while (item == array.getArrayValue(pos))
+                {
+                    array.setNumOfIterations(array.getNumOfIterations() + 1);
+                    array.setNumOfComparisions(array.getNumOfComparisions() + 1);
+
                     pos += 1;
+                }
 
-                if (item != array.getArrValue(pos)) {
+                if (item != array.getArrayValue(pos))
+                {
+                    array.setNumOfComparisions(array.getNumOfComparisions() + 1);
+
                     int temp = item;
-                    item = array.getArrValue(pos);
+                    item = array.getArrayValue(pos);
                     array.setArrayValue(pos, temp);
                     writes++;
                 }
@@ -53,7 +96,7 @@ public class CycleSort implements SortAlgorithm
     }
 
     @Override
-    public String algorithmName()
+    public String getAlgorithmName()
     {
         return "Cycle Sort";
     }

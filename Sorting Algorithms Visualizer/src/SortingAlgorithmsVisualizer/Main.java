@@ -3,6 +3,8 @@ package SortingAlgorithmsVisualizer;
 import SortingAlgorithmsVisualizer.Algorithms.*;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,13 +15,19 @@ import java.util.concurrent.Executors;
  * Main class that sets up the JFrame and all UI elements
  * @author Ben Kilkowski
  */
-public class Main implements ActionListener
+public class Main implements ActionListener, ChangeListener
 {
     private final JFrame window;    //JFrame object that is the core of all UI components.
     private JPanel statBar;         //JPanel that displays and tracks information and data for each algorithm
 
-    JLabel algorithmDisplay;        //JLabel that holds the name of the selected algorithm
-    //public static JLabel comparisonsDisplay;
+    private final String STAT_BAR_GAP = "          ";
+
+    JSlider speedSlider;
+
+    JLabel algorithmDisplay;                        //JLabel that displays the name of the selected algorithm
+    JLabel arraySizeDisplay;                        //JLabel that displays the size of the current array
+    public static JLabel comparisonsDisplay;        //JLabel that shows the number of comparisons made for the algorithm
+    public static JLabel iterationsDisplay;         //JLabel that displays the number of loop and recursive iterations made during the sort
 
     //JButton components for UI
     JMenuBar sortAlgorithmTypesBar;
@@ -78,7 +86,7 @@ public class Main implements ActionListener
 
         //Default algorithm upon program execution
         selectedAlgorithm = new BubbleSort();
-        algorithmDisplay.setText(selectedAlgorithm.algorithmName());
+        algorithmDisplay.setText(selectedAlgorithm.getAlgorithmName());
 
         //Initialization for the sort logic thread
         executor = Executors.newSingleThreadExecutor();
@@ -91,13 +99,17 @@ public class Main implements ActionListener
         };
     }
 
+    //
+    //  Main method (start) of the program
+    //
     public static void main(String[] args)
     {
         Main main = new Main();     //Entry point to the program
     }
 
-    //Instantiates and connects all buttons and UI elements to the JFrame
-    //TODO: Finish UI Configuration
+    //
+    //  Instantiates and connects all buttons and UI elements to the JFrame
+    //
     private void configUI()
     {
         //Stat bar instantiation
@@ -112,13 +124,44 @@ public class Main implements ActionListener
         statBar.add(algorithmDisplay);
 
         //Spacing for statBar items
-        JLabel gap = new JLabel("                              ");
-        statBar.add(gap);
+        JLabel gap1 = new JLabel(STAT_BAR_GAP);
+        statBar.add(gap1);
 
-        /*comparisonsDisplay = new JLabel("Comparisons: " + arrayManager.getNumOfComparisions());
+        arraySizeDisplay = new JLabel("Array Size: " + arrayManager.getArray().length);
+        arraySizeDisplay.setForeground(Color.WHITE);
+        arraySizeDisplay.setFont(new Font(arraySizeDisplay.getFont().getName(), Font.PLAIN, 25));
+        statBar.add(arraySizeDisplay);
+
+        JLabel gap2 = new JLabel(STAT_BAR_GAP);
+        statBar.add(gap2);
+
+        JLabel speedSliderLabel = new JLabel("Speed: ");
+        speedSliderLabel.setForeground(Color.WHITE);
+        speedSliderLabel.setFont(new Font(speedSliderLabel.getFont().getName(), Font.PLAIN, 25));
+        statBar.add(speedSliderLabel);
+
+        speedSlider = new JSlider(JSlider.HORIZONTAL, 1, 100, 1);
+        speedSlider.setValue((int) arrayManager.getMilliSecDelay());
+        speedSlider.setInverted(true);
+        speedSlider.setBackground(Color.BLACK);
+        speedSlider.addChangeListener(this);
+        statBar.add(speedSlider);
+
+        JLabel gap3 = new JLabel(STAT_BAR_GAP);
+        statBar.add(gap3);
+
+        comparisonsDisplay = new JLabel("Comparisons: " + 0);
         comparisonsDisplay.setForeground(Color.WHITE);
         comparisonsDisplay.setFont(new Font(comparisonsDisplay.getFont().getName(), Font.PLAIN, 25));
-        statBar.add(comparisonsDisplay);*/
+        statBar.add(comparisonsDisplay);
+
+        JLabel gap4 = new JLabel(STAT_BAR_GAP);
+        statBar.add(gap4);
+
+        iterationsDisplay = new JLabel("Iterations: " + 0);
+        iterationsDisplay.setForeground(Color.WHITE);
+        iterationsDisplay.setFont(new Font(iterationsDisplay.getFont().getName(), Font.PLAIN, 25));
+        statBar.add(iterationsDisplay);
 
         sortAlgorithmTypesBar = new JMenuBar();
         window.setJMenuBar(sortAlgorithmTypesBar);
@@ -213,10 +256,10 @@ public class Main implements ActionListener
         window.add(sortButton, BorderLayout.SOUTH);
     }
 
-    @Override
     //
     //  Listener method for all UI buttons
     //
+    @Override
     public void actionPerformed(ActionEvent actionEvent)
     {
         if(actionEvent.getSource() == bubbleSortButton)
@@ -308,12 +351,23 @@ public class Main implements ActionListener
             canSort = false;                    //Prevents user from sorting while a sort is in progress
             executor.execute(sortRunnable);     //Starts a thread for sorting, bypassing EDT thread
         }
-        algorithmDisplay.setText(selectedAlgorithm.algorithmName());    //Changes the algorithm name that is displayed on the stat bar
+        algorithmDisplay.setText(selectedAlgorithm.getAlgorithmName());    //Changes the algorithm name that is displayed on the stat bar
         arrayManager.repaint();
     }
 
-    /*public void setComparisonDisplay(int value)
+    //
+    //  Listener method for the speed slider
+    //
+    @Override
+    public void stateChanged(ChangeEvent changeEvent)
     {
-        comparisonsDisplay.setText("Comparision " + value);
-    }*/
+        //Changes millisecond delay in ArrayManager based on speedSlider value
+        JSlider source = (JSlider) changeEvent.getSource();
+        if(!source.getValueIsAdjusting())
+        {
+            int speed = source.getValue();
+
+            arrayManager.setMilliSecDelay(speed);
+        }
+    }
 }

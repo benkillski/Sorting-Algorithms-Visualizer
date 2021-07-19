@@ -7,13 +7,17 @@ public class MergeSort implements SortAlgorithm
     @Override
     public void runSort(ArrayManager array)
     {
-        mergeSort(array, 0, array.arrSize() - 1);
+        mergeSort(array, 0, array.getArraySize() - 1);
     }
 
     private void mergeSort(ArrayManager array, int left, int right)
     {
+        array.setNumOfIterations(array.getNumOfIterations() + 1);
+
         if(left < right)
         {
+            array.setNumOfComparisions(array.getNumOfComparisions() + 1);
+
             int mid = (left + right) / 2;
             mergeSort(array, left, mid);
             mergeSort(array, mid + 1, right);
@@ -29,15 +33,20 @@ public class MergeSort implements SortAlgorithm
 
         while(i <= mid && j <= right)
         {
-            if(array.getArrValue(i) <= array.getArrValue(j))
+            array.setNumOfIterations(array.getNumOfIterations() + 1);
+            array.setNumOfComparisions(array.getNumOfComparisions() + 1);
+
+            if(array.getArrayValue(i) <= array.getArrayValue(j))
             {
-                temp[k] = array.getArrValue(i);
+                array.setNumOfComparisions(array.getNumOfComparisions() + 1);
+
+                temp[k] = array.getArrayValue(i);
                 k++;
                 i++;
             }
             else
             {
-                temp[k] = array.getArrValue(j);
+                temp[k] = array.getArrayValue(j);
                 k++;
                 j++;
             }
@@ -45,24 +54,34 @@ public class MergeSort implements SortAlgorithm
 
         while(i <= mid)
         {
-            temp[k] = array.getArrValue(i);
+            array.setNumOfIterations(array.getNumOfIterations() + 1);
+            array.setNumOfComparisions(array.getNumOfComparisions() + 1);
+
+            temp[k] = array.getArrayValue(i);
             k++;
             i++;
         }
 
         while(j <= right)
         {
-            temp[k] = array.getArrValue(j);
+            array.setNumOfIterations(array.getNumOfIterations() + 1);
+            array.setNumOfComparisions(array.getNumOfComparisions() + 1);
+
+            temp[k] = array.getArrayValue(j);
             k++;
             j++;
         }
 
         for(i = left; i <= right; i++)
+        {
+            array.setNumOfIterations(array.getNumOfIterations() + 1);
+
             array.setArrayValue(i, temp[i - left]);
+        }
     }
 
     @Override
-    public String algorithmName()
+    public String getAlgorithmName()
     {
         return "Merge Sort";
     }

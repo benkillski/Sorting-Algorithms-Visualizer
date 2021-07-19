@@ -7,7 +7,7 @@ public class CombSort implements SortAlgorithm
     @Override
     public void runSort(ArrayManager array)
     {
-        int size = array.arrSize();
+        int size = array.getArraySize();
 
         int gap = size;
 
@@ -15,16 +15,23 @@ public class CombSort implements SortAlgorithm
 
         while (gap != 1 || swapped == true)
         {
+            array.setNumOfIterations(array.getNumOfIterations() + 1);
+            array.setNumOfComparisions(array.getNumOfComparisions() + 1);
+
             gap = getNextGap(gap);
 
             swapped = false;
 
             for (int i = 0; i  < size - gap; i++)
             {
-                if (array.getArrValue(i) > array.getArrValue(i+gap))
+                array.setNumOfIterations(array.getNumOfIterations() + 1);
+
+                if (array.getArrayValue(i) > array.getArrayValue(i+gap))
                 {
-                    int temp = array.getArrValue(i);
-                    array.setArrayValue(i, array.getArrValue(i + gap));
+                    array.setNumOfComparisions(array.getNumOfComparisions() + 1);
+
+                    int temp = array.getArrayValue(i);
+                    array.setArrayValue(i, array.getArrayValue(i + gap));
                     array.setArrayValue(i + gap, temp);
 
                     swapped = true;
@@ -42,7 +49,7 @@ public class CombSort implements SortAlgorithm
     }
 
     @Override
-    public String algorithmName()
+    public String getAlgorithmName()
     {
         return "Comb Sort";
     }

@@ -1,26 +1,29 @@
 package SortingAlgorithmsVisualizer.Algorithms;
 
 import SortingAlgorithmsVisualizer.ArrayManager;
-import SortingAlgorithmsVisualizer.Main;
-
-import java.awt.*;
 
 public class SelectionSort implements SortAlgorithm
 {
     @Override
     public void runSort(ArrayManager array)
     {
-        System.out.println(Thread.currentThread().getName());
-        int size = array.arrSize();
+        int size = array.getArraySize();
         for (int i = 0; i < size - 1; i++)
         {
+            array.setNumOfIterations(array.getNumOfIterations() + 1);
+
             // Find the minimum element in unsorted array
             int minIndex = i;
             for (int j = i + 1; j < size; j++)
-                if (array.getArrValue(j) < array.getArrValue(minIndex))
-                {
+            {
+                array.setNumOfIterations(array.getNumOfIterations() + 1);
+
+                if (array.getArrayValue(j) < array.getArrayValue(minIndex)) {
+                    array.setNumOfComparisions(array.getNumOfComparisions() + 1);
+
                     minIndex = j;
                 }
+            }
 
             // Swap the found minimum element with the first element
             array.swap(minIndex, i);
@@ -28,7 +31,7 @@ public class SelectionSort implements SortAlgorithm
     }
 
     @Override
-    public String algorithmName()
+    public String getAlgorithmName()
     {
         return "Selection Sort";
     }

@@ -40,7 +40,7 @@ public class SleepSort implements SortAlgorithm
     }
 
     @Override
-    public String algorithmName() {
+    public String getAlgorithmName() {
         return null;
     }
 }

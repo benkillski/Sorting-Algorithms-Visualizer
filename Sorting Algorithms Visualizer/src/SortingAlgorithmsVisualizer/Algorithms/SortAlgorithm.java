@@ -6,5 +6,5 @@ public interface SortAlgorithm
 {
     void runSort(ArrayManager array);
 
-    String algorithmName();
+    String getAlgorithmName();
 }
