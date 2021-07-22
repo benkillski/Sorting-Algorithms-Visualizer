@@ -26,6 +26,7 @@ public class Main implements ActionListener, ChangeListener
 
     JLabel algorithmDisplay;                        //JLabel that displays the name of the selected algorithm
     JLabel arraySizeDisplay;                        //JLabel that displays the size of the current array
+    JTextField arraySizeTextField;                  //Text field for array size to be inputted
     public static JLabel comparisonsDisplay;        //JLabel that shows the number of comparisons made for the algorithm
     public static JLabel iterationsDisplay;         //JLabel that displays the number of loop and recursive iterations made during the sort
 
@@ -86,7 +87,7 @@ public class Main implements ActionListener, ChangeListener
 
         //Default algorithm upon program execution
         selectedAlgorithm = new BubbleSort();
-        algorithmDisplay.setText(selectedAlgorithm.getAlgorithmName());
+        algorithmDisplay.setText("Algorithm: " + selectedAlgorithm.getAlgorithmName());
 
         //Initialization for the sort logic thread
         executor = Executors.newSingleThreadExecutor();
@@ -118,7 +119,7 @@ public class Main implements ActionListener, ChangeListener
         window.add(statBar, BorderLayout.NORTH);
 
         //Algorithm name display JLabel initialization
-        algorithmDisplay = new JLabel();
+        algorithmDisplay = new JLabel("Algorithm: ");
         algorithmDisplay.setForeground(Color.WHITE);
         algorithmDisplay.setFont(new Font(algorithmDisplay.getFont().getName(), Font.PLAIN, 25));
         statBar.add(algorithmDisplay);
@@ -132,7 +133,16 @@ public class Main implements ActionListener, ChangeListener
         arraySizeDisplay.setFont(new Font(arraySizeDisplay.getFont().getName(), Font.PLAIN, 25));
         statBar.add(arraySizeDisplay);
 
-        JLabel gap2 = new JLabel(STAT_BAR_GAP);
+        /*arraySizeTextField = new JTextField("100");
+        arraySizeTextField.addActionListener(actionEvent ->
+        {
+            int size = Integer.parseInt(arraySizeTextField.getText());
+            arrayManager.setColumnWidth(arrayManager.WINDOW_WIDTH / (size));
+            arrayManager.randomizeArray(size);
+        });
+        statBar.add(arraySizeTextField);*/
+
+                JLabel gap2 = new JLabel(STAT_BAR_GAP);
         statBar.add(gap2);
 
         JLabel speedSliderLabel = new JLabel("Speed: ");
@@ -351,7 +361,7 @@ public class Main implements ActionListener, ChangeListener
             canSort = false;                    //Prevents user from sorting while a sort is in progress
             executor.execute(sortRunnable);     //Starts a thread for sorting, bypassing EDT thread
         }
-        algorithmDisplay.setText(selectedAlgorithm.getAlgorithmName());    //Changes the algorithm name that is displayed on the stat bar
+        algorithmDisplay.setText("Algorithm: " + selectedAlgorithm.getAlgorithmName());    //Changes the algorithm name that is displayed on the stat bar
         arrayManager.repaint();
     }
 

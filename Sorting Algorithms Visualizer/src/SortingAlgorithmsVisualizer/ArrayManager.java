@@ -12,13 +12,13 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class ArrayManager extends JPanel
 {
-    public static final int WINDOW_WIDTH = 1520;
+    public static final int WINDOW_WIDTH = 1530;
     public static final int WINDOW_HEIGHT = 700;
-    private static final int COLUMN_WIDTH = 10;         //Width of each graphical array element representation
+    private static int columnWidth = 15;         //Width of each graphical array element representation
 
     private static long milliSecDelay = 25;    //Used to determine the speed at which the visualization is ran
 
-    private final int[] array;                  //Array of elements to be sorted
+    private int[] array;                  //Array of elements to be sorted
     private final Color[] elementColors;        //Color of each graphical array element representation
 
     int numOfComparisions;
@@ -34,9 +34,9 @@ public class ArrayManager extends JPanel
 
         setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
 
-        array = new int[(WINDOW_WIDTH / COLUMN_WIDTH)  - 2];
+        array = new int[(WINDOW_WIDTH / columnWidth) - 2];
         elementColors = new Color[array.length];
-        randomizeArray();
+        randomizeArray(array.length);
 
         setBackground(Color.BLACK);
     }
@@ -44,13 +44,15 @@ public class ArrayManager extends JPanel
     //
     //  Generates random elements for the array
     //
-    void randomizeArray()
+    public void randomizeArray(int size)
     {
+        array = new int[size];
         Random rand = new Random();
         for (int i = 0; i < array.length - 1; i++)
         {
             array[i] = rand.nextInt(WINDOW_HEIGHT - 50) + 1;
         }
+        //System.out.println("SIZE: " + array.length);
         revalidate();
         repaint();
     }
@@ -159,7 +161,7 @@ public class ArrayManager extends JPanel
         for(int i = 0; i < array.length - 1; i++)
         {
             graphics.setColor(elementColors[i]);
-            graphics.fillRect((i * COLUMN_WIDTH) + (COLUMN_WIDTH * 2), WINDOW_HEIGHT - 12, COLUMN_WIDTH, -array[i]);
+            graphics.fillRect((i * columnWidth) + (columnWidth * 2), WINDOW_HEIGHT, columnWidth, -array[i]);
         }
         graphics.dispose();
     }
@@ -199,6 +201,22 @@ public class ArrayManager extends JPanel
     public int[] getArray()
     {
         return array;
+    }
+
+    //
+    //  Returns the width of each column
+    //
+    public int getColumnWidth()
+    {
+        return columnWidth;
+    }
+
+    //
+    //  Sets the width of each column
+    //
+    public void setColumnWidth(int width)
+    {
+        columnWidth = width;
     }
 
     //
