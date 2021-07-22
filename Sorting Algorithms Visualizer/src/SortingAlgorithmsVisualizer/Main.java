@@ -8,6 +8,7 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Hashtable;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -26,7 +27,7 @@ public class Main implements ActionListener, ChangeListener
 
     JLabel algorithmDisplay;                        //JLabel that displays the name of the selected algorithm
     JLabel arraySizeDisplay;                        //JLabel that displays the size of the current array
-    JTextField arraySizeTextField;                  //Text field for array size to be inputted
+    //JTextField arraySizeTextField;                  //Text field for array size to be inputted
     public static JLabel comparisonsDisplay;        //JLabel that shows the number of comparisons made for the algorithm
     public static JLabel iterationsDisplay;         //JLabel that displays the number of loop and recursive iterations made during the sort
 
@@ -156,6 +157,16 @@ public class Main implements ActionListener, ChangeListener
         speedSlider.setBackground(Color.BLACK);
         speedSlider.addChangeListener(this);
         statBar.add(speedSlider);
+
+        Hashtable labelTable = new Hashtable();
+        JLabel slowLabel = new JLabel("Slow");
+        slowLabel.setForeground(Color.WHITE);
+        labelTable.put(100, slowLabel);
+        JLabel fastLabel = new JLabel("Fast");
+        fastLabel.setForeground(Color.WHITE);
+        labelTable.put(1, fastLabel);
+        speedSlider.setLabelTable(labelTable);
+        speedSlider.setPaintLabels(true);
 
         JLabel gap3 = new JLabel(STAT_BAR_GAP);
         statBar.add(gap3);

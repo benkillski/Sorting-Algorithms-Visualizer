@@ -2,7 +2,7 @@ package SortingAlgorithmsVisualizer.Algorithms;
 
 import SortingAlgorithmsVisualizer.ArrayManager;
 
-//TODO: FIX BITONIC SORT LOGIC
+//Only works on lists whose sizes are a power of 2
 public class BitonicSort implements SortAlgorithm
 {
     @Override
@@ -12,56 +12,36 @@ public class BitonicSort implements SortAlgorithm
         bitonicSort(array, 0, array.getArraySize(), up);
     }
 
-    void bitonicSort(ArrayManager array, int low, int cnt, int dir)
+    private void bitonicSort(ArrayManager array, int low, int count, int dir)
     {
-        array.setNumOfIterations(array.getNumOfIterations() + 1);
-
-        if (cnt>1)
+        if(count > 1)
         {
-            array.setNumOfComparisions(array.getNumOfComparisions() + 1);
+            int k = count / 2;
 
-            int k = cnt/2;
-
-            // sort in ascending order since dir here is 1
             bitonicSort(array, low, k, 1);
 
-            // sort in descending order since dir here is 0
-            bitonicSort(array,low+k, k, 0);
+            bitonicSort(array, low + k, k, 0);
 
-            // Will merge wole sequence in ascending order
-            // since dir=1.
-            bitonicMerge(array, low, cnt, dir);
+            bitonicMerge(array, low, count, dir);
         }
     }
 
-    private void bitonicMerge(ArrayManager array, int low, int cnt, int dir)
+    private void bitonicMerge(ArrayManager array, int low, int count, int dir)
     {
-        array.setNumOfIterations(array.getNumOfIterations() + 1);
-
-        if (cnt > 1)
+        if(count > 1)
         {
-            array.setNumOfComparisions(array.getNumOfComparisions() + 1);
-
-            int k = cnt / 2;
-            for (int i = low; i < low + k; i++)
-            {
-                array.setNumOfIterations(array.getNumOfIterations() + 1);
-
+            int k = count / 2;
+            for(int i = low; i < low + k; i++)
                 compAndSwap(array, i, i + k, dir);
-            }
             bitonicMerge(array, low, k, dir);
-            bitonicMerge(array,low + k, k, dir);
+            bitonicMerge(array, low + k, k, dir);
         }
     }
 
     private void compAndSwap(ArrayManager array, int i, int j, int dir)
     {
-        if ( (array.getArrayValue(i) > array.getArrayValue(j) && dir == 1) || (array.getArrayValue(i) < array.getArrayValue(j) && dir == 0) )
-        {
-            array.setNumOfComparisions(array.getNumOfComparisions() + 1);
-
+        if((array.getArrayValue(i) > array.getArrayValue(j) && dir == 1) || (array.getArrayValue(i) < array.getArrayValue(j) && dir == 0))
             array.swap(i, j);
-        }
     }
 
     @Override
