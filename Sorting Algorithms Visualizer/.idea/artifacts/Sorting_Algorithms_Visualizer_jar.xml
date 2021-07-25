@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Sorting Algorithms Visualizer:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Sorting_Algorithms_Visualizer_jar</output-path>
+    <root id="archive" name="Sorting Algorithms Visualizer.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="Sorting Algorithms Visualizer" />
+    </root>
+  </artifact>
+</component>

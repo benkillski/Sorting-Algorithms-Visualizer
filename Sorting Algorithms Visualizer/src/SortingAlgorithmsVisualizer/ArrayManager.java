@@ -92,6 +92,8 @@ public class ArrayManager extends JPanel
                 {
                     elementColors[i] = Color.RED;
                 }
+                randomizeArray(array.length);
+                repaint();
                 return false;
             }
             elementColors[i] = Color.GREEN;     //Green indicating that the sort was successful
