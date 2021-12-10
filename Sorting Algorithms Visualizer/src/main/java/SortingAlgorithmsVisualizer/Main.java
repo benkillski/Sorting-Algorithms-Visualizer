@@ -27,7 +27,7 @@ public class Main implements ActionListener, ChangeListener
 
     JLabel algorithmDisplay;                        //JLabel that displays the name of the selected algorithm
     JLabel arraySizeDisplay;                        //JLabel that displays the size of the current array
-    //JTextField arraySizeTextField;                  //Text field for array size to be inputted
+    //JTextField arraySizeTextField;                //Text field for array size to be inputted
     public static JLabel comparisonsDisplay;        //JLabel that shows the number of comparisons made for the algorithm
     public static JLabel iterationsDisplay;         //JLabel that displays the number of loop and recursive iterations made during the sort
 
